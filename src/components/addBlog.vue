@@ -16,12 +16,16 @@
           <label>Cheese</label>
           <input type="checkbox" value = "cheese" v-model="blog.categories">
       </div>
-      </form>
 
       <label>Author:</label>
       <select v-model="blog.author">
-          <option v-for ="author in authors">{{author}}</option>
+          <option :key="author" v-for ="author in authors">{{author}}</option>
       </select>
+
+      <button v-on:click.prevent="post">Add Blog</button>
+      </form>
+
+      
 
       <div id="preview">
           <h3>Preview blog</h3>
@@ -30,7 +34,7 @@
           <p style="white-space: pre">{{blog.content}}</p>
           <p>Blog categories:</p>
           <ul>
-              <li v-for="cat in blog.categories">{{cat}}</li>
+              <li :key="cat" v-for="cat in blog.categories">{{cat}}</li>
           </ul>
           <p>Author: {{blog.author}}</p>
       </div>
@@ -51,7 +55,20 @@ export default {
        },
        authors: ["Lukas", "DEVY", "Lisbeth"]
     }
-  }
+  },
+    methods: {
+     
+      post: function() {
+        const axios = require('axios');
+          axios.post('https://jsonplaceholder.typicode.com/posts',{
+              title: this.blog.title,
+              body: this.blog.content,
+              userId: 1
+          }).then(data => {
+              console.log(data);
+          });
+      }
+    }
 }
 </script>
 
