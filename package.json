@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "npm-watch": "^0.6.0",
     "vue": "^2.5.11",
     "vue-resource": "^1.5.1"
   },

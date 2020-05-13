@@ -1,11 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
-import axios from 'axios'
 
-
-Vue.prototype.$http = axios;
- //for http requests
- 
+window.axios = require('axios');
 
 
 
