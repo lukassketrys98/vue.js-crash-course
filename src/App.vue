@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-   <!-- <AddBlog/> -->
-   <ShowBlogs/>
-   <ListBlogs/>
+    <Header/>
+   <router-view>
+
+   </router-view>
+   
   </div>
 </template>
 
@@ -11,6 +13,7 @@
 import addBlog from './components/addBlog';
 import showBlogs from './components/showBlogs';
 import listBlogs from './components/listBlogs';
+import header from './components/header';
 
 export default {
   name: 'app',
@@ -18,6 +21,7 @@ export default {
   'AddBlog': addBlog,
   'ShowBlogs': showBlogs ,
   'ListBlogs': listBlogs ,
+  'Header': header 
   },
   data () {
     return {

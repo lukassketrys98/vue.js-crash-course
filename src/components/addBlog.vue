@@ -63,11 +63,7 @@ export default {
         const axios = require('axios');
         //where and what we want to sent
         //making a post request
-          axios.post('https://jsonplaceholder.typicode.com/posts',{
-              title: this.blog.title,
-              body: this.blog.content,
-              userId: 1
-          }).then(data =>  { //when its completed, do that
+          axios.post('https://my-database-7b462.firebaseio.com/posts.json',this.blog).then(data =>  { //when its completed, do that
         console.log(data);
         this.submitted = true;
       })

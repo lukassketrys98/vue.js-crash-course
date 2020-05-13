@@ -4,10 +4,13 @@
       <h1>All Blog Articles</h1>
       <input type="text" v-model = "search" placeholder = "Search Blogs">
       <div v-for= "blog in filteredBlogs" class ="single-blog">
+          
           <!-- adding custom directives v-(myname) -->
+         <router-link v-bind:to="'/blog/' + blog.id">
          <h1 v-rainbow>{{blog.title | to-uppercase}}</h1> 
+         </router-link>
          <!-- adding filters -->
-         <article>{{blog.body | snippet }}</article>
+         <article>{{blog.content | snippet }}</article>
       </div>
   </div>
 </template>
@@ -28,16 +31,18 @@ export default {
 
   },
   created(){
-      const axios = require('axios');
-      axios.get('https://jsonplaceholder.typicode.com/posts').then(responseData => {
-          this.blogs = responseData.data.slice(0,10);
-          console.log(this.blogs)
-         
-          
-      })
-  },
-  computed: {
-      
+    
+  
+const myRequest = new Request('https://my-database-7b462.firebaseio.com/posts.json');
+
+fetch(myRequest).then( response =>  response.json()).then( response => {
+    var blogsArray = [];
+    for(let key in response){
+        response[key].id = key;
+        blogsArray.push(response[key]);
+    }
+    this.blogs = blogsArray;
+  });
   },
   mixins:[
       searchMixin
@@ -58,7 +63,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 #show-blogs{
     max-width: 800px;
@@ -75,6 +80,10 @@ input[type=text]{
     margin: 20px 0;
     box-sizing: border-box;
     background: #eee;
+}
+
+a{
+    text-decoration: none;
 }
   
 </style>
