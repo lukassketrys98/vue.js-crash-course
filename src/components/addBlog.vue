@@ -1,7 +1,7 @@
 <template>
   <div id="add-blog">
       <h2>Add a New Blog Post</h2>
-      <form>
+      <form v-if="submitted == false">
           <label>Blog Title:</label>
           <input type="text" required v-model.lazy="blog.title">
             <label>Blog Content</label>
@@ -24,7 +24,7 @@
 
       <button v-on:click.prevent="post">Add Blog</button>
       </form>
-
+    <div v-if="submitted == true">Thanks for adding your post</div>
       
 
       <div id="preview">
@@ -53,18 +53,21 @@ export default {
             categories: [],
             author: ""
        },
-       authors: ["Lukas", "DEVY", "Lisbeth"]
+       authors: ["Lukas", "DEVY", "Lisbeth"],
+        submitted: false
     }
   },
     methods: {
      
       post: function() {
         const axios = require('axios');
+        //where and what we want to sent
+        //making a post request
           axios.post('https://jsonplaceholder.typicode.com/posts',{
               title: this.blog.title,
               body: this.blog.content,
               userId: 1
-          }).then(data =>  {
+          }).then(data =>  { //when its completed, do that
         console.log(data);
         this.submitted = true;
       })
