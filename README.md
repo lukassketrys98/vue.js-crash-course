@@ -1,6 +1,7 @@
 # vue-proceed
 
 > A Vue.js project
+See between different branches!
 
 ## Build Setup
 
